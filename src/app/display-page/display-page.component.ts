@@ -48,19 +48,5 @@ export class DisplayPageComponent implements OnInit {
     this.randomComic.emit();
   }
 
-/*
-  getComic() {
-      this.xkcdService.getComic().then((data) => {
-      this.myjsondata = data;
-      this.img = data.img;
-      this.loaderService.displayLoader(false);
-    });
-  }
-
-  getJsonData() {
-    return this.myjsondata;
-  }
-
-*/
 
 }

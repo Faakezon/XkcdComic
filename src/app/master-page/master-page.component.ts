@@ -9,8 +9,6 @@ import { Location } from '@angular/common';
 import 'rxjs/add/operator/switchMap';
 
 
-
-
 @Component({
   selector: 'app-master-page',
   templateUrl: './master-page.component.html',
@@ -32,21 +30,8 @@ export class MasterPageComponent implements OnInit {
 
 
   ngOnInit() {
-  this.display.setSpinner(true);
-  /*this.comicService.getLatencyComic().then((data) => {
-      this.id = data.num;
-      this.router.navigate(['comic', this.id]);
-      this.masterTitle = data.title;
-      this.masterImg = data.img;
-      this.display.setSpinner(false);
-
-      this.route.params
-          .switchMap((params: Params) => this.comicService.getSpecificComic(+params['id']))
-          .subscribe(comic => data = comic);
-    });*/
-
+    this.display.setSpinner(true);
     this.getComic()
-
   }
 
   getComic(): void {

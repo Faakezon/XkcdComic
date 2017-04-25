@@ -1,3 +1,6 @@
+  <nav>
+    <a routerLink="/comic/{{currentComic?.num}}" routerLinkActive="active"></a>
+  </nav>
   <div>
   <div class="aligner">
   <md-toolbar color="primary">
@@ -28,7 +31,7 @@
 
 
   <md-menu x-position="before" #menu="mdMenu">
-      <button type="button" md-button (click)="getRandomComic()">Random Comic</button>
+      <button type="button" md-button (click)="getRandomComic()">Random Comic </button>
   </md-menu>
 
 
@@ -46,3 +49,4 @@
   </div>
 </div>
 
+      <!--button type="button" routerLink="/comic/:{{currentComic?.num}}" routerLinkActive="active" md-button (click)="getRandomComic()">Random Comic </button-->

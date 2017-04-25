@@ -1,6 +1,6 @@
 import { DisplayPageComponent } from './../display-page/display-page.component';
 import { ComicService } from './../comic.service';
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, Params, ActivatedRoute } from '@angular/router';
 import { XkcdComic } from './../xkcdComic';
 import { Location } from '@angular/common';
@@ -12,7 +12,6 @@ import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-master-page',
-  changeDetection: ChangeDetectionStrategy.Default,
   templateUrl: './master-page.component.html',
   styleUrls: ['./master-page.component.css'],
   providers: [ComicService]
@@ -50,7 +49,7 @@ export class MasterPageComponent implements OnInit {
   getRandomComic(): void {
     this.objSpinnerStatus = true;
       this.comicService.getLatencyRandomComic().then(XkcdComic => this.currentComic = XkcdComic).then((data) => {
-        this.objSpinnerStatus = true;
+        this.objSpinnerStatus = false;
         this.gotoDetail();
         //this.currentComic.title = data.title;
         //this.currentComic.img = data.img;

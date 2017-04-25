@@ -1,4 +1,4 @@
-export class XkcdComic {
+export interface XkcdComic {
 
     month: string;
     num: number;

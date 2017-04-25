@@ -9,14 +9,16 @@ import 'rxjs/Rx';
 export class ComicService implements OnInit {
 
 private jsonData = {};
+currentComic: XkcdComic;
 
   private comicUrl = 'http://crossorigin.me/http://xkcd.com/info.0.json';  // URL to web API
   private randomComicUrl = 'http://crossorigin.me/http://c.xkcd.com/random/comic/';
-  constructor (private http: Http) {}
+  constructor (private http: Http) {
+  }
 
- ngOnInit() {
+  ngOnInit() {
 
- }
+  }
 
   createRandomComicUrl(): string {
     let url = 'http://crossorigin.me/' + 'http://xkcd.com/' + this.createRandomNumberForUrl() + '/info.0.json';
@@ -30,11 +32,10 @@ private jsonData = {};
     return nr;
   }
 
-
   getComic (): Promise<XkcdComic> {
     return this.http.get(this.comicUrl)
                   .toPromise()
-                  .then(this.extractData)
+                  .then(this.extractData).then(XkcdComic => this.currentComic = XkcdComic)
                   .catch(this.handleError);
   }
 
@@ -54,8 +55,9 @@ private jsonData = {};
   getRandomComic(): Promise<XkcdComic> {
     return this.http.get(this.createRandomComicUrl())
       .toPromise()
-      .then(this.extractData)
+      .then(this.extractData).then(XkcdComic => this.currentComic = XkcdComic)
       .catch(this.handleError);
+
   }
 
   getLatencyRandomComic(): Promise<XkcdComic> {

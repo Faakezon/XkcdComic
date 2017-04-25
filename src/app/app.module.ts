@@ -8,7 +8,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { DisplayPageComponent } from './display-page/display-page.component';
 import { MaterialModule, MdButtonModule, MdIcon } from '@angular/material';
 
 import { RouterModule, Routes } from '@angular/router';
@@ -25,7 +24,6 @@ const ROUTES: Routes = [
   declarations: [
     AppComponent,
     MasterPageComponent,
-    DisplayPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +33,7 @@ const ROUTES: Routes = [
     MdButtonModule,
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [ ComicService, SpinnerService, DisplayPageComponent ],
+  providers: [ ComicService, SpinnerService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

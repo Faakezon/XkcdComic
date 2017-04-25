@@ -1,3 +1,48 @@
-<div class="container">
-  <app-display-page [masterTitle]="masterTitle" [masterImg]="masterImg" (randomComic)="randomComic($event)"></app-display-page>
+  <div>
+  <div class="aligner">
+  <md-toolbar color="primary">
+
+      <div class="leftSide">
+      <button md-fab>
+        <svg style="width:50px;height:50px" viewBox="0 0 24 22">
+          <path fill="#000000" d="M21,11H6.83L10.41,7.41L9,6L3,12L9,18L10.41,16.58L6.83,13H21V11Z" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="middle">
+      <div *ngIf="currentComic">
+        {{currentComic.title}}
+      </div>
+    </div>
+
+    <div class="rightSide">
+      <button md-icon-button [md-menu-trigger-for]="menu">
+        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+          <path fill="#000000" d="M12,16A2,2 0 0,1 14,18A2,2 0 0,1 12,20A2,2 0 0,1 10,18A2,2 0 0,1 12,16M12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12A2,2 0 0,1 12,10M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4Z" />
+        </svg>
+      </button>
+    </div>
+  </md-toolbar>
 </div>
+
+
+  <md-menu x-position="before" #menu="mdMenu">
+      <button type="button" md-button (click)="getRandomComic()">Random Comic</button>
+  </md-menu>
+
+
+</div>
+
+
+<div class="container">
+
+  <span *ngIf="objSpinnerStatus">
+      <img id="spinner" src="/src/app/LoaderIMG/Loader.gif" ng-show="loading"/>
+</span>
+
+  <div *ngIf="currentComic">
+    <img src= {{currentComic.img}}>
+  </div>
+</div>
+

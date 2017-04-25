@@ -1,68 +1,68 @@
 import { DisplayPageComponent } from './../display-page/display-page.component';
 import { ComicService } from './../comic.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Router, Params, ActivatedRoute } from '@angular/router';
 import { XkcdComic } from './../xkcdComic';
 import { Location } from '@angular/common';
-
+import { SpinnerService } from './../spinner.service';
+import { MdButtonModule, MdIcon } from '@angular/material';
 
 import 'rxjs/add/operator/switchMap';
 
 
 @Component({
   selector: 'app-master-page',
+  changeDetection: ChangeDetectionStrategy.Default,
   templateUrl: './master-page.component.html',
   styleUrls: ['./master-page.component.css'],
   providers: [ComicService]
 })
 export class MasterPageComponent implements OnInit {
 
+  objSpinnerStatus: boolean;
   currentComic: XkcdComic;
 
-  id: number;
 
-  masterTitle: string = '';
-  masterImg: string = '';
-
-  constructor (private comicService: ComicService, private display: DisplayPageComponent, private router: Router, private route: ActivatedRoute,
+  constructor (private comicService: ComicService, private router: Router, private route: ActivatedRoute, private spinnerService: SpinnerService,
     private location: Location) {
+      this.objSpinnerStatus = true;
+
   }
 
 
   ngOnInit() {
-    this.display.setSpinner(true);
-    this.getComic()
+      this.getComic();
   }
 
   getComic(): void {
-    this.comicService.getLatencyComic().then(XkcdComic => this.currentComic = XkcdComic).then((data) => {
-      this.id = this.currentComic.num;
-      this.masterTitle = this.currentComic.title;
-      this.masterImg = this.currentComic.img;
-      this.display.setSpinner(false);
-      this.gotoDetail();
-    });
+    this.objSpinnerStatus = true;
+
+      this.comicService.getLatencyComic().then(XkcdComic => this.currentComic = XkcdComic).then((data) => {
+        this.objSpinnerStatus = false;
+        this.gotoDetail();
+        //this.currentComic.title = data.title;
+        //this.currentComic.img = data.img;
+      });
 
   }
+
+
+  getRandomComic(): void {
+    this.objSpinnerStatus = true;
+      this.comicService.getLatencyRandomComic().then(XkcdComic => this.currentComic = XkcdComic).then((data) => {
+        this.objSpinnerStatus = true;
+        this.gotoDetail();
+        //this.currentComic.title = data.title;
+        //this.currentComic.img = data.img;
+        console.log(this.currentComic);
+
+      });
+
+  }
+
 
   gotoDetail(): void {
     this.router.navigate(['comic', this.currentComic.num]);
   }
-
-
-  randomComic() {
-    this.display.setSpinner(true);
-    this.comicService.getLatencyRandomComic().then(XkcdComic => this.currentComic = XkcdComic).then((data) => {
-      this.id = this.currentComic.num;
-      this.masterTitle = this.currentComic.title;
-      this.masterImg = this.currentComic.img;
-      this.display.setSpinner(false);
-      console.log(this.currentComic.num);
-      this.gotoDetail();
-    });
-
-  }
-
-
 
 }

@@ -39,8 +39,6 @@ export class MasterPageComponent implements OnInit {
       this.comicService.getLatencyComic().then(XkcdComic => this.currentComic = XkcdComic).then((data) => {
         this.objSpinnerStatus = false;
         this.gotoDetail();
-        //this.currentComic.title = data.title;
-        //this.currentComic.img = data.img;
       });
 
   }
@@ -51,8 +49,6 @@ export class MasterPageComponent implements OnInit {
       this.comicService.getLatencyRandomComic().then(XkcdComic => this.currentComic = XkcdComic).then((data) => {
         this.objSpinnerStatus = false;
         this.gotoDetail();
-        //this.currentComic.title = data.title;
-        //this.currentComic.img = data.img;
         console.log(this.currentComic);
 
       });
